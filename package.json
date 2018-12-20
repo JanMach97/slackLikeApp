@@ -1,0 +1,23 @@
+{
+  "name": "slacklikeapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "graphql-yoga": "^1.16.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JanMach97/slackLikeApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JanMach97/slackLikeApp/issues"
+  },
+  "homepage": "https://github.com/JanMach97/slackLikeApp#readme"
+}

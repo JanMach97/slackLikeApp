@@ -4,13 +4,36 @@ const { GraphQLServer } = require("graphql-yoga");
 const typeDefs = `
 type Query {
   info: String!
+  feed: [Message!]  
+}
+
+type Mutation {
+  post(message: Sting!, user: String!) Link!
+}
+
+type Message {
+  id: ID!,
+  message: String!,
+  user: String!
 }
 `;
+
+let messages = [{
+  id: 'msg-01',
+  message: 'Test message',
+  user: 'Pablos'
+}]
 
 // 2
 const resolvers = {
   Query: {
-    info: () => `SlackLikeApp`
+    info: () => `SlackLikeApp`,
+    feed: () => messages,
+  },
+  Message: {
+    id: (parent) => parent.id,
+    message: (parent) => parent.message,
+    user: (parent) => parent.user
   }
 };
 

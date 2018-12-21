@@ -1,28 +1,12 @@
 const { GraphQLServer } = require("graphql-yoga");
 
-// 1
-const typeDefs = `
-type Query {
-  info: String!
-  feed: [Message!]  
-}
-
-type Mutation {
-  post(message: Sting!, user: String!) Link!
-}
-
-type Message {
-  id: ID!,
-  message: String!,
-  user: String!
-}
-`;
 
 let messages = [{
   id: 'msg-01',
   message: 'Test message',
   user: 'Pablos'
 }]
+let idCount = messages.length;
 
 // 2
 const resolvers = {
@@ -30,16 +14,22 @@ const resolvers = {
     info: () => `SlackLikeApp`,
     feed: () => messages,
   },
-  Message: {
-    id: (parent) => parent.id,
-    message: (parent) => parent.message,
-    user: (parent) => parent.user
-  }
+  Mutation: {
+    post: (parent, args) => {
+      const message = {
+        id: `msg-${idCount++}`,
+        message: args.message,
+        user: args.user
+      }
+      messages.push(message)
+      return message
+    }
+  },
 };
 
 // 3
 const server = new GraphQLServer({
-  typeDefs,
+  typeDefs: './src/schema.graphql',
   resolvers
 });
 server.start(() => console.log(`Server is running on http://localhost:4000`));
